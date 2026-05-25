@@ -1,26 +1,591 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
+
+/* ──── CSS Custom Properties ──── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --parchment: #FAF9F6;
+  --parchment-dark: #F0EDE8;
+  --parchment-darker: #E8E4DD;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+  --marian-blue: #1D3557;
+  --marian-blue-light: #264A78;
+  --vatican-gold: #F4A261;
+  --vatican-gold-bright: #FFC300;
+  --cardinal-red: #9B2226;
+  --cardinal-red-light: #B5393E;
+
+  --border-color: rgba(29, 53, 87, 0.15);
+  --border-light: rgba(29, 53, 87, 0.08);
+  --bg-table-stripe: rgba(29, 53, 87, 0.02);
+  --bg-table-hover: rgba(29, 53, 87, 0.05);
+  --selection-bg: rgba(29, 53, 87, 0.15);
+  --scrollbar-thumb: rgba(29, 53, 87, 0.3);
+  --scrollbar-thumb-hover: rgba(29, 53, 87, 0.5);
+  --tooltip-bg: #1D3557;
+  --tooltip-text: #FFFFFF;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ──── Themes ──── */
+.theme-dark {
+  --parchment: #121826;
+  --parchment-dark: #1F2937;
+  --parchment-darker: #374151;
+  --text-primary: #E5E7EB;
+  --text-secondary: #9CA3AF;
+  --marian-blue: #93C5FD;
+  --marian-blue-light: #60A5FA;
+  --vatican-gold: #FBBF24;
+  --vatican-gold-bright: #FDE047;
+  --cardinal-red: #FCA5A5;
+  --cardinal-red-light: #F87171;
+
+  --border-color: rgba(147, 197, 253, 0.2);
+  --border-light: rgba(147, 197, 253, 0.1);
+  --bg-table-stripe: rgba(147, 197, 253, 0.03);
+  --bg-table-hover: rgba(147, 197, 253, 0.08);
+  --selection-bg: rgba(147, 197, 253, 0.25);
+  --scrollbar-thumb: rgba(147, 197, 253, 0.3);
+  --scrollbar-thumb-hover: rgba(147, 197, 253, 0.5);
+  --tooltip-bg: #1F2937;
+  --tooltip-text: #FFFFFF;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.theme-sepia {
+  --parchment: #F4ECD8;
+  --parchment-dark: #E6D9BF;
+  --parchment-darker: #D8C6A6;
+  --text-primary: #433422;
+  --text-secondary: #5C4D3C;
+  --marian-blue: #2A4365;
+  --marian-blue-light: #3182CE;
+  --vatican-gold: #D69E2E;
+  --vatican-gold-bright: #ECC94B;
+  --cardinal-red: #9B2C2C;
+  --cardinal-red-light: #C53030;
+
+  --border-color: rgba(42, 67, 101, 0.2);
+  --border-light: rgba(42, 67, 101, 0.1);
+  --bg-table-stripe: rgba(42, 67, 101, 0.03);
+  --bg-table-hover: rgba(42, 67, 101, 0.08);
+  --selection-bg: rgba(42, 67, 101, 0.2);
+  --scrollbar-thumb: rgba(42, 67, 101, 0.3);
+  --scrollbar-thumb-hover: rgba(42, 67, 101, 0.5);
+  --tooltip-bg: #2A4365;
+  --tooltip-text: #FFFFFF;
+}
+
+/* ──── Font Sizes ──── */
+html {
+  --base-font-size: 16px;
+  font-size: var(--base-font-size);
+}
+html.font-sm { --base-font-size: 14px; }
+html.font-md { --base-font-size: 16px; }
+html.font-lg { --base-font-size: 18px; }
+html.font-xl { --base-font-size: 20px; }
+
+/* ──── Print Styles ──── */
+@media print {
+  .no-print, .toc-mobile-toggle, .toc-mobile-panel, .reading-progress, .hero-ornament {
+    display: none !important;
+  }
+  
+  body, html {
+    background: #fff !important;
+    color: #000 !important;
+    font-size: 12pt !important;
+  }
+
+  .prose-theological {
+    max-width: 100% !important;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000 !important;
+  }
+
+  p, h2, h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .comparison-table {
+    page-break-inside: avoid;
   }
 }
 
+@theme inline {
+  --color-parchment: var(--parchment);
+  --color-parchment-dark: var(--parchment-dark);
+  --color-parchment-darker: var(--parchment-darker);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-marian-blue: var(--marian-blue);
+  --color-marian-blue-light: var(--marian-blue-light);
+  --color-vatican-gold: var(--vatican-gold);
+  --color-vatican-gold-bright: var(--vatican-gold-bright);
+  --color-cardinal-red: var(--cardinal-red);
+  --color-cardinal-red-light: var(--cardinal-red-light);
+  --font-heading: 'Cormorant Garamond', 'Georgia', serif;
+  --font-heading-alt: 'Cormorant Garamond', 'Georgia', serif;
+  --font-body: 'Lora', 'Georgia', serif;
+  
+  --color-tooltip-bg: var(--tooltip-bg);
+  --color-tooltip-text: var(--tooltip-text);
+}
+
+/* ──── Base Styles ──── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+  max-width: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--parchment);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100%;
+}
+
+/* ──── Selection ──── */
+::selection {
+  background-color: var(--selection-bg);
+}
+
+/* ──── Custom Scrollbar ──── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--parchment-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+/* ──── Reading Progress Bar ──── */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--vatican-gold) 0%,
+    var(--vatican-gold-bright) 50%,
+    var(--vatican-gold) 100%
+  );
+  z-index: 9999;
+  transition: width 50ms linear;
+  box-shadow: 0 0 8px rgba(244, 162, 97, 0.5);
+}
+
+/* ──── Drop Cap ──── */
+.drop-cap::first-letter {
+  font-family: var(--font-heading);
+  color: var(--cardinal-red);
+  float: left;
+  font-size: 4.2em;
+  line-height: 0.8;
+  padding-right: 0.12em;
+  margin-top: 0.05em;
+  font-weight: 600;
+}
+
+/* ──── Blockquote ──── */
+.theological-quote {
+  border-left: 4px solid var(--vatican-gold);
+  background: linear-gradient(135deg, rgba(244, 162, 97, 0.06) 0%, rgba(250, 249, 246, 0.8) 100%);
+  padding: 1.5rem 1.75rem;
+  margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+  position: relative;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.theological-quote::before {
+  content: '\201C';
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  color: var(--vatican-gold);
+  position: absolute;
+  top: -0.3rem;
+  left: 0.75rem;
+  opacity: 0.35;
+  line-height: 1;
+}
+
+.theological-quote p {
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.theological-quote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-style: normal;
+  font-weight: 500;
+}
+
+/* ──── Section Divider ──── */
+.section-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 3rem 0;
+  color: var(--vatican-gold);
+  opacity: 0.6;
+}
+
+.section-divider::before,
+.section-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--marian-blue) 30%,
+    var(--marian-blue) 70%,
+    transparent
+  );
+  opacity: 0.25;
+}
+
+/* ──── Comparison Table ──── */
+.comparison-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 2rem 0;
+  font-size: 1rem;
+}
+
+.comparison-table thead th {
+  background: linear-gradient(135deg, var(--marian-blue) 0%, var(--marian-blue-light) 100%);
+  color: #fff;
+  padding: 1rem 1.25rem;
+  font-family: var(--font-heading-alt);
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: left;
+  letter-spacing: 0.01em;
+  border-bottom: 2px solid rgba(244, 162, 97, 0.4);
+}
+
+.comparison-table tbody td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-light);
+  vertical-align: top;
+  line-height: 1.65;
+}
+
+.comparison-table tbody tr:nth-child(even) {
+  background-color: var(--bg-table-stripe);
+}
+
+.comparison-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.comparison-table tbody tr:hover {
+  background-color: var(--bg-table-hover);
+}
+
+/* ──── Footnote Tooltip ──── */
+.footnote-ref {
+  color: var(--marian-blue);
+  cursor: pointer;
+  font-size: 0.75em;
+  vertical-align: super;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  position: relative;
+  padding: 0 1px;
+}
+
+.footnote-ref:hover {
+  color: var(--cardinal-red);
+}
+
+.footnote-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--tooltip-bg);
+  color: var(--tooltip-text);
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  font-style: normal;
+  font-weight: 400;
+  width: max-content;
+  max-width: 360px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(-50%) translateY(4px);
+}
+
+.footnote-ref:hover .footnote-tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.footnote-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--tooltip-bg);
+}
+
+/* ──── Footnotes Section ──── */
+.footnotes-section {
+  border-top: 2px solid var(--border-color);
+  margin-top: 4rem;
+  padding-top: 2rem;
+}
+
+.footnote-item {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+.footnote-item:target {
+  background-color: rgba(244, 162, 97, 0.12);
+  border-radius: 4px;
+  padding: 0.5rem;
+  margin-left: -0.5rem;
+  margin-right: -0.5rem;
+  transition: background-color 0.6s ease;
+}
+
+.footnote-number {
+  color: var(--marian-blue);
+  font-weight: 700;
+  font-size: 0.82rem;
+  min-width: 2rem;
+  flex-shrink: 0;
+}
+
+.footnote-backlink {
+  color: var(--marian-blue);
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-left: 0.4rem;
+  transition: color 0.2s;
+}
+
+.footnote-backlink:hover {
+  color: var(--cardinal-red);
+}
+
+/* ──── ToC Styles ──── */
+.toc-link {
+  display: block;
+  padding: 0.35rem 0;
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  border-left: 2px solid transparent;
+  transition: all 0.25s ease;
+  font-family: var(--font-body);
+}
+
+.toc-link:hover {
+  color: var(--marian-blue);
+  border-left-color: rgba(29, 53, 87, 0.3);
+}
+
+.toc-link.active {
+  color: var(--marian-blue);
+  border-left-color: var(--vatican-gold);
+  font-weight: 600;
+  background: linear-gradient(90deg, rgba(244, 162, 97, 0.08) 0%, transparent 100%);
+}
+
+.toc-link-sub {
+  padding-left: 2rem;
+  font-size: 0.82rem;
+}
+
+/* ──── Hero ──── */
+.hero-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.hero-ornament::before,
+.hero-ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--vatican-gold), transparent);
+}
+
+/* ──── Animations ──── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; }
+.animate-delay-200 { animation-delay: 0.2s; }
+.animate-delay-300 { animation-delay: 0.3s; }
+.animate-delay-400 { animation-delay: 0.4s; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* ──── Prose Overrides (Tailwind Typography) ──── */
+.prose-theological {
+  --tw-prose-body: var(--text-primary);
+  --tw-prose-headings: var(--marian-blue);
+  --tw-prose-links: var(--marian-blue);
+  --tw-prose-bold: var(--text-primary);
+  --tw-prose-quotes: var(--text-primary);
+  --tw-prose-quote-borders: var(--vatican-gold);
+  max-width: 52rem;
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.85;
+}
+
+.prose-theological h2 {
+  font-family: var(--font-heading);
+  color: var(--marian-blue);
+  font-size: 1.65rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  margin-top: 3rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.prose-theological h3 {
+  font-family: var(--font-heading-alt);
+  color: var(--marian-blue);
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin-top: 2.25rem;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.prose-theological h4 {
+  font-family: var(--font-heading-alt);
+  color: var(--text-primary);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-theological p {
+  margin-bottom: 1.25rem;
+  text-align: justify;
+  hyphens: auto;
+}
+
+.prose-theological a {
+  color: var(--marian-blue);
+  text-decoration-color: var(--vatican-gold);
+  text-underline-offset: 3px;
+  transition: all 0.2s;
+}
+
+.prose-theological a:hover {
+  color: var(--cardinal-red);
+  text-decoration-color: var(--cardinal-red);
+}
+
+/* ──── Mobile ToC Toggle ──── */
+/* Styled via utility classes directly in the component */
+
+.toc-mobile-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 40;
+  backdrop-filter: blur(2px);
+}
+
+.toc-mobile-panel {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  max-width: 85vw;
+  background: var(--parchment);
+  z-index: 45;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  overflow-y: auto;
+  padding: 2rem 1.5rem;
+}
+
+/* Latin text styling for special terms */
+.latin-term {
+  font-style: italic;
+  color: var(--marian-blue);
+  font-weight: 500;
 }
