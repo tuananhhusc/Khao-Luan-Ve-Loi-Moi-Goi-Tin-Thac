@@ -23,7 +23,7 @@ export default function UXControls() {
         <button
           onClick={() => setTheme("light")}
           className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-            theme === "light" ? "bg-marian-blue text-white" : "text-marian-blue hover:bg-marian-blue/10"
+            theme === "light" ? "bg-marian-blue text-[var(--parchment)]" : "text-marian-blue hover:bg-marian-blue/10"
           }`}
           title="Giao diện gốc"
         >
@@ -34,7 +34,7 @@ export default function UXControls() {
         <button
           onClick={() => setTheme("sepia")}
           className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-            theme === "sepia" ? "bg-marian-blue text-white" : "text-marian-blue hover:bg-marian-blue/10"
+            theme === "sepia" ? "bg-marian-blue text-[var(--parchment)]" : "text-marian-blue hover:bg-marian-blue/10"
           }`}
           title="Chế độ bảo vệ mắt"
         >
@@ -45,7 +45,7 @@ export default function UXControls() {
         <button
           onClick={() => setTheme("dark")}
           className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
-            theme === "dark" ? "bg-marian-blue text-white" : "text-marian-blue hover:bg-marian-blue/10"
+            theme === "dark" ? "bg-marian-blue text-[var(--parchment)]" : "text-marian-blue hover:bg-marian-blue/10"
           }`}
           title="Chế độ ban đêm"
         >

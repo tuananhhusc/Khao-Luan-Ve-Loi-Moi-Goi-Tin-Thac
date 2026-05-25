@@ -123,10 +123,10 @@ export default function TableOfContents() {
       {mobileOpen && (
         <>
           <div
-            className="toc-mobile-overlay xl:hidden"
+            className="toc-mobile-overlay animate-fade-in-overlay xl:hidden"
             onClick={() => setMobileOpen(false)}
           />
-          <div className="toc-mobile-panel xl:hidden">
+          <div className="toc-mobile-panel animate-slide-in-right xl:hidden">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-heading text-sm tracking-[0.2em] uppercase text-marian-blue font-semibold">
                 Mục Lục
